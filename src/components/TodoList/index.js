@@ -1,33 +1,31 @@
-import { Col, Row, Input, Button, Select, Tag } from "antd";
-import Todo from "../Todo";
+import { Button, Col, Input, Row, Select, Tag } from "antd";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { addTodo } from "../../redux/actions";
+import Todo from "../Todo";
+// import { addTodo } from "../../redux/actions";
 import { useState } from "react";
+// import { todosRemainingSelector } from "../../redux/selectors";
 import { v4 as uuidv4 } from "uuid";
 import { todosRemainingSelector } from "../../redux/selectors";
+import TodoSlice from "./TodoSlice";
 
 export default function TodoList() {
   const [todoName, setTodoName] = useState("");
   const [priority, setPrioritye] = useState("Medium");
-  // const searchText = useSelector(searchTextSelector);
   const todoList = useSelector(todosRemainingSelector);
-  console.log({ todoList });
   const dispatch = useDispatch();
-
-  // console.log({ searchText });
   const handleAddButtonClick = () => {
     dispatch(
-      addTodo({
+      TodoSlice.actions.addTodo({
         id: uuidv4(),
         name: todoName,
-        priority: priority,
+        priority,
         completed: false,
       })
     );
+    // reset input TodoName, and select Todos
     setTodoName("");
     setPrioritye("Medium");
   };
-
   const handleInputChange = (e) => {
     setTodoName(e.target.value);
   };
@@ -44,17 +42,14 @@ export default function TodoList() {
             id={todo.id}
             prioriry={todo.priority}
             completed={todo.completed}
+            time={todo.time}
           />
         ))}
       </Col>
       <Col span={24}>
         <Input.Group style={{ display: "flex" }} compact>
           <Input value={todoName} onChange={handleInputChange} />
-          <Select
-            defaultValue="Medium"
-            value={priority}
-            onChange={handlePriorityChange}
-          >
+          <Select defaultValue="Medium" value={priority} onChange={handlePriorityChange}>
             <Select.Option value="High" label="High">
               <Tag color="red">High</Tag>
             </Select.Option>

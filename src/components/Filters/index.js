@@ -1,11 +1,7 @@
-import { Col, Row, Input, Typography, Radio, Select, Tag } from "antd";
+import { Col, Input, Radio, Row, Select, Tag, Typography } from "antd";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  priorityFilterChange,
-  searchFilterChange,
-  statusFilterChange,
-} from "../../redux/actions";
+import FiltersSlice from "./FiltersSlice";
 
 const { Search } = Input;
 
@@ -16,24 +12,21 @@ export default function Filters() {
   const [filterPriorities, setFilterPriorities] = useState([]);
   const handleSearchTextChange = (e) => {
     setSearchText(e.target.value);
-    dispatch(searchFilterChange(e.target.value.trim()));
+    dispatch(FiltersSlice.actions.searchFilterChange(e.target.value));
   };
   const handleStatusChange = (e) => {
-    console.log({ e });
     setFilterStatus(e.target.value);
-    dispatch(statusFilterChange(e.target.value));
+    dispatch(FiltersSlice.actions.statusFilterChange(e.target.value));
   };
   const handlePriorityChange = (e) => {
     setFilterPriorities(e);
-    dispatch(priorityFilterChange(e));
+    dispatch(FiltersSlice.actions.prioritiesFilterChange(e));
   };
 
   return (
     <Row justify="center">
       <Col span={24}>
-        <Typography.Paragraph
-          style={{ fontWeight: "bold", marginBottom: 3, marginTop: 10 }}
-        >
+        <Typography.Paragraph style={{ fontWeight: "bold", marginBottom: 3, marginTop: 10 }}>
           Search
         </Typography.Paragraph>
         <Search
@@ -43,9 +36,7 @@ export default function Filters() {
         />
       </Col>
       <Col sm={24}>
-        <Typography.Paragraph
-          style={{ fontWeight: "bold", marginBottom: 3, marginTop: 10 }}
-        >
+        <Typography.Paragraph style={{ fontWeight: "bold", marginBottom: 3, marginTop: 10 }}>
           Filter By Status
         </Typography.Paragraph>
         <Radio.Group value={filterStatus} onChange={handleStatusChange}>
@@ -55,9 +46,7 @@ export default function Filters() {
         </Radio.Group>
       </Col>
       <Col sm={24}>
-        <Typography.Paragraph
-          style={{ fontWeight: "bold", marginBottom: 3, marginTop: 10 }}
-        >
+        <Typography.Paragraph style={{ fontWeight: "bold", marginBottom: 3, marginTop: 10 }}>
           Filter By Priority
         </Typography.Paragraph>
         <Select
