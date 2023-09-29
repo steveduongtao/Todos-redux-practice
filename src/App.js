@@ -9,7 +9,7 @@ function App() {
   return (
     <div
       style={{
-        width: 500,
+        width: 1000,
         margin: "0 auto",
         display: "flex",
         flexDirection: "column",
@@ -20,9 +20,9 @@ function App() {
         height: "90vh",
       }}
     >
-      <Title style={{ textAlign: "center" }}>TODO APP WITH REDUX (redux toolkit)</Title>
+      <Title style={{ textAlign: "center" }}></Title>
       <Filters />
-      <Divider />
+      <Divider style={{ marginTop: 100 }} />
       <TodoList />
     </div>
   );

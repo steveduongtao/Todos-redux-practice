@@ -14,6 +14,7 @@ export default function Filters() {
     setSearchText(e.target.value);
     dispatch(FiltersSlice.actions.searchFilterChange(e.target.value));
   };
+  console.log("setState");
   const handleStatusChange = (e) => {
     setFilterStatus(e.target.value);
     dispatch(FiltersSlice.actions.statusFilterChange(e.target.value));
@@ -26,17 +27,17 @@ export default function Filters() {
   return (
     <Row justify="center">
       <Col span={24}>
-        <Typography.Paragraph style={{ fontWeight: "bold", marginBottom: 3, marginTop: 10 }}>
+        <Typography.Paragraph style={{ fontWeight: "bold", marginBotton: 3 }}>
           Search
         </Typography.Paragraph>
         <Search
           placeholder="input search text"
-          value={searchText}
           onChange={handleSearchTextChange}
+          value={searchText}
         />
       </Col>
       <Col sm={24}>
-        <Typography.Paragraph style={{ fontWeight: "bold", marginBottom: 3, marginTop: 10 }}>
+        <Typography.Paragraph style={{ fontWeight: "bold", marginBotton: 3, marginTop: 10 }}>
           Filter By Status
         </Typography.Paragraph>
         <Radio.Group value={filterStatus} onChange={handleStatusChange}>
@@ -47,14 +48,12 @@ export default function Filters() {
       </Col>
       <Col sm={24}>
         <Typography.Paragraph style={{ fontWeight: "bold", marginBottom: 3, marginTop: 10 }}>
-          Filter By Priority
+          Filter by Priority
         </Typography.Paragraph>
         <Select
           mode="multiple"
-          allowClear
-          placeholder="Please select"
           style={{ width: "100%" }}
-          value={filterPriorities}
+          placeholder="Please select"
           onChange={handlePriorityChange}
         >
           <Select.Option value="High" label="High">

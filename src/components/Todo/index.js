@@ -1,4 +1,4 @@
-import { Checkbox, Row, Tag } from "antd";
+import { Checkbox, Row, Col, Tag, TimePicker } from "antd";
 import { useDispatch } from "react-redux";
 import TodoSlice from "../TodoList/TodoSlice";
 
@@ -24,10 +24,20 @@ export default function Todo({ name, prioriry, completed, id, time }) {
       <Checkbox checked={completed} onChange={toggleCheckbox}>
         {name}
       </Checkbox>
-      <Tag color="lime">{time}</Tag>
-      <Tag color={priorityColorMapping[prioriry]} style={{ margin: 0 }}>
-        {prioriry}
-      </Tag>
+      <div style={{ display: "flex" }}>
+        <TimePicker.RangePicker
+          disabled
+          style={{ width: "345px", padding: "0 5px", backgroundColor: "white" }}
+          status="warning"
+          value={time}
+        />
+        <Tag
+          style={{ minWidth: "64px", textAlign: "right" }}
+          color={priorityColorMapping[prioriry]}
+        >
+          {prioriry}
+        </Tag>
+      </div>
     </Row>
   );
 }
